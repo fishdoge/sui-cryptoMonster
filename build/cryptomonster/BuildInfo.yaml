@@ -1,0 +1,37 @@
+---
+compiled_package_info:
+  package_name: cryptomonster
+  address_alias_instantiation:
+    cetus_clmm: 1eabed72c53feb3805120a081dc15963c204dc8d091542592abaf7a35689b2fb
+    cryptomonster: "0000000000000000000000000000000000000000000000000000000000000000"
+    integer_mate: 714a63a0dba6da4f017b42d5d0fb78867f18bcde904868e51d951a5a6f5b7f57
+    move_stl: be21a06129308e0495431d12286127897aff07a8ade3970495a4404d97f9eaaa
+    std: "0000000000000000000000000000000000000000000000000000000000000001"
+    sui: "0000000000000000000000000000000000000000000000000000000000000002"
+    timer: "0000000000000000000000000000000000000000000000000000000000000006"
+  source_digest: E97221E3562D5186F094BA2705418BABA8D63512F658E7E5A89F9DD891E34D15
+  build_flags:
+    dev_mode: true
+    test_mode: true
+    generate_docs: false
+    install_dir: ~
+    force_recompilation: false
+    lock_file: ~
+    fetch_deps_only: false
+    skip_fetch_latest_git_deps: false
+    default_flavor: sui
+    default_edition: ~
+    deps_as_root: false
+    silence_warnings: false
+    warnings_are_errors: false
+    json_errors: false
+    additional_named_addresses: {}
+    lint_flag:
+      no_lint: false
+      lint: false
+dependencies:
+  - CetusClmm
+  - IntegerMate
+  - MoveSTL
+  - MoveStdlib
+  - Sui
