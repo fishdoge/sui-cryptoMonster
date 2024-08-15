@@ -15,6 +15,7 @@ module cryptomonster::cryptomonster {
   //use cetus_clmm::tick::{Tick, TickManager};
   //use cetus_clmm::rewarder::{RewarderManager, RewarderGlobalVault};
   //use cetus_amm::position;
+  use cryptomonster::pool::{Self, Pool, LSP};
   use integer_mate::i32::{Self as i32, I32};
   use sui::sui::SUI;
   use sui::clock::{Self, Clock};
