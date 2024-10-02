@@ -5,8 +5,9 @@ module cryptomonster::cryptomonster_tests {
     // use cryptomonster::cryptomonster;
     use sui::sui::SUI;
     use sui::coin::{Self, Coin, mint_for_testing as mint};
-    use sui::test_scenario::{Self as test, Scenario, next_tx, ctx};
+    use sui::test_scenario::{Self as test, Scenario, next_tx, ctx, take_from_sender, return_to_sender, ids_for_sender};
     use cryptomonster::pool::{Self, Pool, LSP};
+    use cryptomonster::cryptomonster::{Self, A};
     use sui::transfer;
     use sui::test_utils;
 
@@ -67,6 +68,7 @@ module cryptomonster::cryptomonster_tests {
             );
 
             //assert!(burn(lsp) == 31622000, 0);
+            std::debug::print(&lsp);
             transfer::public_transfer(lsp, tx_context::sender(ctx(test)));
         };
 
@@ -84,9 +86,11 @@ module cryptomonster::cryptomonster_tests {
 
         next_tx(test, owner);
         {
-            //let pool = test::take_shared<Pool<POOLEY, BEEP>>(test);
-            //let lsp = test::take_from_sender<Coin<LSP<BEEP,SUI>>>(test);
-            //assert!(burn(lsp) == 31622000, 0);
+            let mut a = ids_for_sender<Coin<LSP<POOLEY, BEEP>>>(test);
+            std::debug::print(&a);
+            let mut b = take_from_sender<Coin<LSP<POOLEY, BEEP>>>(test);
+            std::debug::print(&b);
+            return_to_sender<Coin<LSP<POOLEY, BEEP>>>(test, b);
         }
     }
 

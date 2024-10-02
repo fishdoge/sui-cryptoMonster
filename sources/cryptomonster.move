@@ -35,6 +35,7 @@ module cryptomonster::cryptomonster {
     b: TypeName,
   }
 
+  // Cetus LP Token
   #[allow(unused_field)]
   public struct Position has key, store {
     id: UID,
@@ -50,6 +51,7 @@ module cryptomonster::cryptomonster {
     liquidity: u128,
   }
 
+  // Monster
   public struct Monster has key, store {
     id: UID,
     lp: A,
@@ -59,6 +61,7 @@ module cryptomonster::cryptomonster {
     coin_b: u64,
   }
 
+  // Garden
   public struct Monster_garden has key, store {
     id: UID,
     monsters: Bag,
