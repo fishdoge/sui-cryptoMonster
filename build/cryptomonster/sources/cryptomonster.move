@@ -22,6 +22,19 @@ module cryptomonster::cryptomonster {
   use sui::tx_context::sender;
   use sui::balance::Balance;
   use sui::bag::{Self, Bag};
+  use sui::dynamic_object_field::{
+        Self as dof,
+        add,
+        borrow,
+        borrow_mut,
+        exists_,
+        exists_with_type,
+        remove,
+        id as field_id,
+    };
+
+  /// Dynamic field key for an item placed into the kiosk.
+  public struct Item has store, copy, drop { id: ID }
 
   // ---- Object That Can Be Deployed ----
   public struct Balloon has key {
@@ -35,6 +48,7 @@ module cryptomonster::cryptomonster {
     b: TypeName,
   }
 
+  // Cetus LP Token
   #[allow(unused_field)]
   public struct Position has key, store {
     id: UID,
@@ -50,6 +64,7 @@ module cryptomonster::cryptomonster {
     liquidity: u128,
   }
 
+  // Monster
   public struct Monster has key, store {
     id: UID,
     lp: A,
@@ -59,6 +74,7 @@ module cryptomonster::cryptomonster {
     coin_b: u64,
   }
 
+  // Garden
   public struct Monster_garden has key, store {
     id: UID,
     monsters: Bag,
@@ -138,6 +154,51 @@ module cryptomonster::cryptomonster {
     monster_entity
   }
 
+  // Monster Entity 2
+  fun monster_entity_2<T1: drop, T2: drop>(clock: &mut Clock, ctx: &mut TxContext): Monster {
+    let a_dummy = A {
+      id: object::new(ctx),
+      a: std::type_name::get<T1>(),
+      b: std::type_name::get<T2>(),
+    };
+    let b_dummy = A {
+      id: object::new(ctx),
+      a: std::type_name::get<T1>(),
+      b: std::type_name::get<T2>(),
+    };
+    let mut monster_entity = Monster {
+      id: object::new(ctx),
+      lp: a_dummy,
+      birth_day: clock::timestamp_ms(clock),
+      last_time_groom: clock::timestamp_ms(clock),
+      coin_a: 0,
+      coin_b: 0,
+    };
+    //let A { id:bid, a:ba, b:bb } = b_dummy;
+    debug::print(&object::id(&b_dummy));
+    dof::add(&mut monster_entity.id, Item { id: object::id(&b_dummy) }, b_dummy);
+    monster_entity
+  }
+  // Destroy Monster Entity 2
+  fun destroy_monster_entity_2<T1: drop, T2: drop>(mon: Monster) {
+    let Monster {
+      id: monster_id,
+      lp: lp_entity,
+      birth_day: _,
+      last_time_groom: _,
+      coin_a: _,
+      coin_b: _,
+    } = mon;
+    let A {
+      id: a_id,
+      a: _,
+      b: _,
+    } = lp_entity;
+    monster_id.delete();
+    a_id.delete();
+  }
+
+  // Destroy Monster Entity
   fun destroy_monster_entity<T1: drop, T2: drop>(mon: Monster) {
     let Monster {
       id: monster_id,
@@ -236,6 +297,15 @@ module cryptomonster::cryptomonster {
     let mut clock = clock::create_for_testing(&mut ctx);
     let mon = monster_entity<SUI,SUI>(&mut clock, &mut ctx);
     destroy_monster_entity<SUI,SUI>(mon);
+    clock::destroy_for_testing(clock);
+  }
+
+  #[test]
+  fun test_monster_entity_2() {
+    let mut ctx = tx_context::dummy();
+    let mut clock = clock::create_for_testing(&mut ctx);
+    let mon = monster_entity_2<SUI,SUI>(&mut clock, &mut ctx);
+    destroy_monster_entity_2<SUI,SUI>(mon);
     clock::destroy_for_testing(clock);
   }
 
