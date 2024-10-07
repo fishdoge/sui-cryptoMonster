@@ -32,7 +32,7 @@ export default function Home() {
           <div className="absolute inset-0  h-[300px] flex items-center justify-center z-0">
             <div className="text-center mt-10">
 
-              <span className="text-2xl md:text-3xl font-sans text-black">Sui monster</span>
+
             </div>
         </div>
 
@@ -43,6 +43,7 @@ export default function Home() {
             height={250}
             alt="Picture of the author"
           />
+          <span className="ml-20 text-2xl md:text-3xl font-sans text-black">Sui monster</span>
         </div>
 
         <div className="text-2xl	z-20 text-black">This is the sui monster! The Defi gamming plateform</div>
