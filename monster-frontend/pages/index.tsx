@@ -23,6 +23,13 @@ export default function Home() {
       className={`${geistSans.variable} ${geistMono.variable} grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]`}
     >
       <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
+        <div className="absolute inset-0 h-[300px] bg-black transform -skew-y-6 origin-top-left"></div>
+          <div className="absolute inset-0 flex items-center justify-center">
+            <div className="text-center mt-10">
+
+              <span className="text-2xl md:text-3xl font-sans text-black">Sui monster</span>
+            </div>
+        </div>
 
         <div className="-ml-20">
           <Image
@@ -33,7 +40,7 @@ export default function Home() {
           />
         </div>
 
-        <div className="text-2xl	 text-black">This is the sui monster!</div>
+        <div className="text-2xl	 text-black">This is the sui monster! The Defi gamming plateform</div>
         <ConnectButton/>
         <ul>
           {accounts.map((account) => (
