@@ -1,7 +1,7 @@
 import Image from "next/image";
 import localFont from "next/font/local";
 //import { ConnectWallet } from "@/component/connectWallet"
-import { ConnectButton } from '@mysten/dapp-kit';
+import { ConnectButton, useAccounts   } from '@mysten/dapp-kit';
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -15,6 +15,9 @@ const geistMono = localFont({
 });
 
 export default function Home() {
+  const accounts = useAccounts ();
+
+
   return (
     <div
       className={`${geistSans.variable} ${geistMono.variable} grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]`}
@@ -32,10 +35,15 @@ export default function Home() {
 
         <div className="text-2xl	 text-black">This is the sui monster!</div>
         <ConnectButton/>
+        <ul>
+          {accounts.map((account) => (
+            <li key={account.address}>- {account.address}</li>
+          ))}
+			  </ul>
       </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
+      <footer className="w-full h-[40px] row-start-3 flex gap-6 flex-wrap items-center justify-center bg-slate-500">
         <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
+          className="flex items-center gap-2 hover:underline hover:underline-offset-4 text-cyan-50"
           href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
           target="_blank"
           rel="noopener noreferrer"
@@ -50,7 +58,7 @@ export default function Home() {
           Learn
         </a>
         <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
+          className="flex items-center gap-2 hover:underline hover:underline-offset-4 text-cyan-50"
           href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
           target="_blank"
           rel="noopener noreferrer"
@@ -65,8 +73,8 @@ export default function Home() {
           Examples
         </a>
         <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
+          className="flex items-center gap-2 hover:underline hover:underline-offset-4 text-cyan-50"
+          href="https://github.com/fishdoge/sui-cryptoMonster/tree/main"
           target="_blank"
           rel="noopener noreferrer"
         >
@@ -77,7 +85,7 @@ export default function Home() {
             width={16}
             height={16}
           />
-          Go to nextjs.org →
+          Go to github →
         </a>
       </footer>
     </div>
