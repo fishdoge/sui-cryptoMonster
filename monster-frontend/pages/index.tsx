@@ -1,5 +1,7 @@
 import Image from "next/image";
 import localFont from "next/font/local";
+//import { ConnectWallet } from "@/component/connectWallet"
+import { ConnectButton } from '@mysten/dapp-kit';
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -27,14 +29,9 @@ export default function Home() {
             alt="Picture of the author"
           />
         </div>
-        
+
         <div className="text-2xl	 text-black">This is the sui monster!</div>
-       
-        <div className="">
-          <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-            Connect Wallet
-          </button>
-        </div>
+        <ConnectButton/>
       </main>
       <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
         <a
