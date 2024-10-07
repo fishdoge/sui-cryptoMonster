@@ -1,7 +1,11 @@
 import Image from "next/image";
 import localFont from "next/font/local";
 //import { ConnectWallet } from "@/component/connectWallet"
-import { ConnectButton, useAccounts   } from '@mysten/dapp-kit';
+import {
+  useAccounts
+} from '@mysten/dapp-kit';
+import { useState } from 'react';
+import { SendTransaction } from '@/component/sendTransaction'
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -15,16 +19,17 @@ const geistMono = localFont({
 });
 
 export default function Home() {
-  const accounts = useAccounts ();
+  const accounts = useAccounts();
+
 
 
   return (
     <div
       className={`${geistSans.variable} ${geistMono.variable} grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]`}
     >
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
+      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start z-0">
         <div className="absolute inset-0 h-[300px] bg-black transform -skew-y-6 origin-top-left"></div>
-          <div className="absolute inset-0 flex items-center justify-center">
+          <div className="absolute inset-0  h-[300px] flex items-center justify-center z-0">
             <div className="text-center mt-10">
 
               <span className="text-2xl md:text-3xl font-sans text-black">Sui monster</span>
@@ -40,13 +45,19 @@ export default function Home() {
           />
         </div>
 
-        <div className="text-2xl	 text-black">This is the sui monster! The Defi gamming plateform</div>
-        <ConnectButton/>
-        <ul>
-          {accounts.map((account) => (
-            <li key={account.address}>- {account.address}</li>
-          ))}
-			  </ul>
+        <div className="text-2xl	z-20 text-black">This is the sui monster! The Defi gamming plateform</div>
+
+        <div>
+          {/* <ConnectButton/> */}
+          <ul>
+            {accounts.map((account) => (
+              <li key={account.address}>- {account.address}</li>
+            ))}
+          </ul>
+          <SendTransaction/>
+
+        </div>
+
       </main>
       <footer className="w-full h-[40px] row-start-3 flex gap-6 flex-wrap items-center justify-center bg-slate-500">
         <a

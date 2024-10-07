@@ -21,6 +21,7 @@ export default function App() {
 		<QueryClientProvider client={queryClient}>
 			<SuiClientProvider networks={networkConfig} defaultNetwork="localnet">
 				<WalletProvider>
+
 					<Home/>
 				</WalletProvider>
 			</SuiClientProvider>
