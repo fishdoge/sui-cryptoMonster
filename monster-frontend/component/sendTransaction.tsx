@@ -41,7 +41,7 @@ export function SendTransaction() {
 
 								// Always report transaction effects to the wallet after execution
 								if (executeResult.rawEffects) {
-									reportTransactionEffects(executeResult.rawEffects);
+									reportTransactionEffects(JSON.stringify(executeResult.rawEffects!));
 								}
 
 								console.log(executeResult);

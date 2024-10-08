@@ -37,7 +37,7 @@ export function SignAndSend() {
 			});
 
 			// Always report transaction effects to the wallet after execution
-			reportTransactionEffects(executeResult.rawEffects!);
+			reportTransactionEffects(JSON.stringify(executeResult.rawEffects!));
 
 			console.log(executeResult);
 

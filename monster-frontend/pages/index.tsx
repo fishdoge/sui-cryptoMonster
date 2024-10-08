@@ -4,7 +4,6 @@ import localFont from "next/font/local";
 import {
   useAccounts
 } from '@mysten/dapp-kit';
-import { SendTransaction } from '@/component/sendTransaction';
 import { SignAndSend } from '@/component/signAndTransaction';
 
 const geistSans = localFont({
@@ -49,7 +48,7 @@ export default function Home() {
         <div className="text-2xl	z-20 text-black">This is the sui monster! The Defi gamming plateform</div>
 
         <div>
-      
+
           <ul>
             {accounts.map((account) => (
               <li key={account.address}>- {account.address}</li>
