@@ -4,8 +4,8 @@ import localFont from "next/font/local";
 import {
   useAccounts
 } from '@mysten/dapp-kit';
-import { useState } from 'react';
-import { SendTransaction } from '@/component/sendTransaction'
+import { SendTransaction } from '@/component/sendTransaction';
+import { SignAndSend } from '@/component/signAndTransaction';
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -36,7 +36,7 @@ export default function Home() {
             </div>
         </div>
 
-        <div className="-ml-20">
+        <div className="-ml-20 mt-4">
           <Image
             src="/sui-web3-monster.png"
             width={250}
@@ -49,13 +49,13 @@ export default function Home() {
         <div className="text-2xl	z-20 text-black">This is the sui monster! The Defi gamming plateform</div>
 
         <div>
-          {/* <ConnectButton/> */}
+      
           <ul>
             {accounts.map((account) => (
               <li key={account.address}>- {account.address}</li>
             ))}
           </ul>
-          <SendTransaction/>
+          <SignAndSend/>
 
         </div>
 

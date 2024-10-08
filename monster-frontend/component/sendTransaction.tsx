@@ -6,12 +6,12 @@ import {
 	useSuiClient,
 } from '@mysten/dapp-kit';
 import { toBase64 } from '@mysten/sui/utils';
-import { useState } from 'react';
+import { SetStateAction, useState } from 'react';
 
 
 export function SendTransaction() {
 	const { mutateAsync: signTransaction } = useSignTransaction();
-	const [signature, setSignature] = useState('');
+	const [signatureText, setSignature] = useState('');
 	const client = useSuiClient();
 	const currentAccount = useCurrentAccount();
 
@@ -23,10 +23,13 @@ export function SendTransaction() {
 					<div className='mt-2'>
 						<button className='mt-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded'
 							onClick={async () => {
+
 								const { bytes, signature, reportTransactionEffects } = await signTransaction({
 									transaction: new Transaction(),
 									chain: 'sui:devnet',
 								});
+
+								setSignature(signature)
 
 								const executeResult = await client.executeTransactionBlock({
 									transactionBlock: bytes,
@@ -37,7 +40,9 @@ export function SendTransaction() {
 								});
 
 								// Always report transaction effects to the wallet after execution
-								reportTransactionEffects(executeResult.rawEffects!);
+								if (executeResult.rawEffects) {
+									reportTransactionEffects(executeResult.rawEffects);
+								}
 
 								console.log(executeResult);
 							}}
@@ -45,7 +50,7 @@ export function SendTransaction() {
 							Sign empty transaction
 						</button>
 					</div>
-					<div>Signature: {signature}</div>
+					<div>Signature: {signatureText}</div>
 
 				</>
 			)}
