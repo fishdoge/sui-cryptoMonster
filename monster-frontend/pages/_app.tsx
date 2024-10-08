@@ -11,6 +11,7 @@ import Home from './index'
 const { networkConfig } = createNetworkConfig({
 	localnet: { url: getFullnodeUrl('localnet') },
 	mainnet: { url: getFullnodeUrl('mainnet') },
+	devnet:{url: 'https://fullnode.devnet.sui.io:443' }
 });
 
 const queryClient = new QueryClient();
@@ -19,7 +20,7 @@ export default function App() {
 	return (
 
 		<QueryClientProvider client={queryClient}>
-			<SuiClientProvider networks={networkConfig} defaultNetwork="localnet">
+			<SuiClientProvider networks={networkConfig} defaultNetwork="devnet">
 				<WalletProvider>
 
 					<Home/>
